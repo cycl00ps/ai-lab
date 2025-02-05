@@ -8,6 +8,8 @@ High level diagram and descriptions below. Config files for ewach component in t
 * Reproducable structure for larger scale deployments.
 
 ## High Level Component Diagram
+
+
 ```mermaid
 flowchart TD
  subgraph subGraph0["Docker - localhost:3000"]
