@@ -3,9 +3,9 @@
 High level diagram and descriptions below. Config files for ewach component in their respective folders.
 
 ## Purpose
-Demonstrate quick deployment of AI/LLM frontends and supporting components, allowing you to concentrate on actually using models.
-Ensure everything can run on-prem with NO external dependancies when using models. 
-Reproducable structure for larger scale deplloymemnts. 
+* Demonstrate quick deployment of AI/LLM frontends and supporting components, allowing you to concentrate on actually using models.
+* Ensure everything can run on-prem with NO external dependancies when using models.
+* Reproducable structure for larger scale deployments.
 
 ## High Level Component Diagram
 ```mermaid
@@ -35,3 +35,9 @@ flowchart TD
     style F stroke:#FFE0B2
     style G stroke:#FFE0B2
     style subGraph2 stroke:#FFE0B2
+
+## External Projects and Components
+
+
+https://github.com/ggerganov/llama.cpp/
+https://github.com/mostlygeek/llama-swap
