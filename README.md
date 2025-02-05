@@ -9,7 +9,6 @@ High level diagram and descriptions below. Config files for ewach component in t
 
 ## High Level Component Diagram
 
-
 ```mermaid
 flowchart TD
  subgraph subGraph0["Docker - localhost:3000"]
@@ -38,8 +37,8 @@ flowchart TD
     style G stroke:#FFE0B2
     style subGraph2 stroke:#FFE0B2
 
+
 ## External Projects and Components
 
-
-https://github.com/ggerganov/llama.cpp/
-https://github.com/mostlygeek/llama-swap
+* https://github.com/ggerganov/llama.cpp/
+* https://github.com/mostlygeek/llama-swap
