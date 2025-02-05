@@ -1,0 +1,47 @@
+  openwebui:
+    image: ghcr.io/open-webui/open-webui:main
+    restart: unless-stopped
+    networks:
+      - ai-frontend
+    ports:
+      - "127.0.0.1:3000:8080"
+    environment:
+      - 'ENABLE_WEBSOCKET_SUPPORT="true"'
+      - 'WEBSOCKET_MANAGER="redis"'
+      - 'WEBSOCKET_REDIS_URL="redis://redis:6379/1"'
+    volumes:
+      - /YOUR/LOCAL/FOLDER/HERE:/app/backend/data:rw
+
+  redis:
+    image: docker.io/valkey/valkey:latest
+    container_name: redis-valkey
+    volumes:
+      - redis-data:/data
+    command: "valkey-server --save 30 1"
+    healthcheck:
+      test: "[ $$(valkey-cli ping) = 'PONG' ]"
+      start_period: 5s
+      interval: 1s
+      timeout: 3s
+      retries: 5
+    restart: unless-stopped
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
+    networks:
+      - ai-frontend
+
+networks:
+  ai-frontend:
+
+volumes:
+  open-webui:
+  redis-data:
