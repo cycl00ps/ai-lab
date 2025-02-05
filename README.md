@@ -1,5 +1,13 @@
-# ai-lab
+# Text Model Lab
 
+High level diagram and descriptions below. Config files for ewach component in their respective folders.
+
+## Purpose
+Demonstrate quick deployment of AI/LLM frontends and supporting components, allowing you to concentrate on actually using models.
+Ensure everything can run on-prem with NO external dependancies when using models. 
+Reproducable structure for larger scale deplloymemnts. 
+
+## High Level Component Diagram
 ```mermaid
 flowchart TD
  subgraph subGraph0["Docker - localhost:3000"]
