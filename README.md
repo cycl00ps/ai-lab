@@ -1,5 +1,6 @@
 # ai-lab
 
+```mermaid
 flowchart TD
  subgraph subGraph0["Docker - localhost:3000"]
         B["Redis"]
