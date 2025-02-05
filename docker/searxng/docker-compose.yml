@@ -1,0 +1,54 @@
+services:
+  redis:
+    container_name: redis
+    image: docker.io/valkey/valkey:latest
+    command: valkey-server --save 30 1 --loglevel warning
+    restart: unless-stopped
+    networks:
+      - search
+    volumes:
+      - valkey-data:/data
+    cap_drop:
+      - ALL
+    cap_add:
+      - SETGID
+      - SETUID
+      - DAC_OVERRIDE
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
+
+  searxng:
+    container_name: searxng
+    image: docker.io/searxng/searxng:latest
+    restart: unless-stopped
+    networks:
+      - search
+    ports:
+      - "127.0.0.1:3001:8080"
+    volumes:
+      - /YOUR/LOCAL/FOLDER/HERE:/etc/searxng:rw  # Custom volume path for searxng configuration
+    environment:
+      - SEARXNG_BASE_URL=https://search.thethinkingman.info/ #Change "your.docker.server.ip" to your Docker server's IP
+      - UWSGI_WORKERS=4 #You can change this
+      - UWSGI_THREADS=4 #You can change this
+#    cap_drop:
+#      - ALL
+    cap_add:
+      - CHOWN
+      - SETGID
+      - SETUID
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "1m"
+        max-file: "1"
+
+networks:
+  search:
+
+volumes:
+  valkey-data: # This volume will map to /data/redis
+  searxng: # This volume will map to /data/searxng
