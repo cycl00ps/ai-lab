@@ -1,0 +1,33 @@
+# Seconds to wait for llama.cpp to load and be ready to serve requests
+# If your models take longer to load make this longer
+# Default (and minimum) is 15 seconds
+healthCheckTimeout: 30
+
+# Write HTTP logs (useful for troubleshooting), defaults to false
+logRequests: true
+
+# define valid model values and the upstream server start
+models:
+  "DeepSeek-R1-Distill-Llama-8B-Q5_K":
+    # The command you want llama.cpp to run and how you want it to behave with this model
+	cmd: /YOUR/llamacpp/LOCATION/llama.cpp/build/bin/llama-server --host 127.0.0.1 --port 8999 -m /YOUR/SAVED/MODEL/LOCATIONS/DeepSeek-R1-Distill-Llama-8B-Q5_K.gguf -n -1 --ignore-eos -e -ngl 80 -sm none -mg 0 --n-gpu-layers 66
+
+    # where to reach the server started by cmd, make sure the ports match
+    proxy: http://127.0.0.1:8999
+
+    # aliases names to use this model for
+    aliases:
+    - "DeepSeek-R1-Distill-Llama-8B-Q5_K"
+
+    # check this path for an HTTP 200 OK before serving requests
+    # default: /health to match llama.cpp
+    # use "none" to skip endpoint checking, but may cause HTTP errors
+    # until the model is ready
+    checkEndpoint: /health
+
+    # automatically unload the model after this many seconds
+    # ttl values must be a value greater than 0
+    # default: 0 = never unload model
+    ttl: 120
+
+#Add as many models as you want openwebui to be able to load.
