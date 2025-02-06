@@ -39,6 +39,7 @@ flowchart TD
     style F stroke:#FFE0B2
     style G stroke:#FFE0B2
     style subGraph2 stroke:#FFE0B2```
+```
 
 ## External Projects and Components
 
