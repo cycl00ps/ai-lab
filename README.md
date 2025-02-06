@@ -51,6 +51,6 @@ flowchart TD
 Current lab hardware. 
 Note the GPU is adding a difficultly level if I did it again I'd use something better supported (NVIDIA or Apple M-Series), however the cost/RAM/tokens/sec ratio is pretty good.
 
-Intel(R) Xeon(R) W-1290 CPU @ 3.20GHz
-128GB RAM
-Intel A770 16GB GPU
+* Intel(R) Xeon(R) W-1290 CPU @ 3.20GHz
+* 128GB RAM
+* Intel A770 16GB GPU
