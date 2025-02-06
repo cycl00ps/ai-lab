@@ -1,0 +1,47 @@
+#SearXNG Docker
+search.domain {
+        reverse_proxy 127.0.0.1:3001
+        encode zstd gzip
+
+        tls {
+                dns route53 {
+                        max_retries 5
+#                       aws_profile "default"
+                        access_key_id "DON'T DO THIS STORE SECRETS ELSEWHERE"
+                        secret_access_key "DON'T DO THIS STORE SECRETS ELSEWHERE"
+                        region "us-west-2"
+                }
+        }
+}
+
+#OpenwebUI Docker
+ai.domain {
+        reverse_proxy 127.0.0.1:3000
+        encode zstd gzip
+
+        tls {
+                dns route53 {
+                        max_retries 5
+#                       aws_profile "default"
+                        access_key_id "DON'T DO THIS STORE SECRETS ELSEWHERE"
+                        secret_access_key "DON'T DO THIS STORE SECRETS ELSEWHERE"
+                        region "us-west-2"
+                }
+        }
+}
+
+#Llama-swap service
+# If you want to see the service logs or manually swap models/cehck the service is working
+llama-swap.domain {
+        reverse_proxy 127.0.0.1:8080
+
+        tls {
+                dns route53 {
+                        max_retries 5
+#                       aws_profile "default"
+                        access_key_id "DON'T DO THIS STORE SECRETS ELSEWHERE"
+                        secret_access_key "DON'T DO THIS STORE SECRETS ELSEWHERE"
+                        region "us-west-2"
+                }
+        }
+}
