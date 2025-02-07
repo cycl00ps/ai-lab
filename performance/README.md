@@ -15,7 +15,7 @@
 | DeepSeek-R1-Distill-Qwen-32B-Q3_K_S     |3-bit     | ~14GB     | 3.24              | 4.96            |
 | DeepSeek-R1-Distill-Qwen-14B-Q8_0       |8-bit     | ~15GB     | 3.86              | 8.52            |
 | DeepSeek-R1-Distill-Qwen-14B-Q6_K       |6-bit     | ~12GB     | 7.20              | 12.71           |
-| Microsoft-phi4-Q6_K.gguf                |6-bit     | ~11GB     | 12.8              | 14.66           |
+| Microsoft-phi4-Q6_K                     |6-bit     | ~11GB     | 12.8              | 14.66           |
 | Qwen2.5-Coder-14B-Instruct-Q6_K         |6-bit     | ~11GB     | 25.90             | 13.89           |
 | Qwen2.5-14B-Instruct-1M-Q5_K            |5-bit     | ~10GB     | 46.1              | 10.10           |
 | DeepSeek-R1-Distill-Qwen-14B-Q5_K       |5-bit     | ~10GB     | 36.29             | 10.23           |
