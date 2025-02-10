@@ -7,7 +7,7 @@ Adding AWS BedRock to the Lab,
 * Add models via "Model Access" int eh AWS BedRock console
 * Create an iAM user and group to assign policy key
 * Create a API key for the above user
-* Create and assign an [iAM policy](.\iAMPolicy.json) to the group
+* Create and assign an [iAM policy](iAMPolicy.json) to the group
 
 
 ## Build Docker Image 
