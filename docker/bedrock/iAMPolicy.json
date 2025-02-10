@@ -1,0 +1,15 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Action": [
+                "bedrock:Get*",
+                "bedrock:List*",
+                "bedrock:InvokeModel",
+                "bedrock:InvokeModelWithResponseStream"
+            ],
+            "Effect": "Allow",
+            "Resource": "*"
+        }
+    ]
+}
