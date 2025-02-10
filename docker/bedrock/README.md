@@ -29,6 +29,13 @@ docker run -e AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXXXXX \
 -p 127.0.0.1:3002:80 \
 bedrock-gateway
 ```
+*Note the default API key to access the container is "bedrock"*
+
+To test the container is running you can use curl to connect and list all models (note I have piped into jq for readability, ensure you have that installed.:
+
+```
+curl http://IPADDRESS:PORT/api/v1/models   -H "Content-Type: application/json"   -H "Authorization: Bearer bedrock" | jq 
+```
 
 ## Configure OpenWeb UI
 
