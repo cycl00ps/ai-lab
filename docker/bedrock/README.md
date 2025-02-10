@@ -4,7 +4,8 @@ Adding AWS BedRock to the Lab, this will deploy a docker container that presents
 
 ## Configure AWS
 
-* Add models via "Model Access" int eh AWS BedRock console
+* Choose what region you want to connect to (you'll need this for the docker config as well) 
+* Add models via "Model Access" in the AWS BedRock console
 * Create an iAM user and group to assign policy key
 * Create a API key for the above user
 * Create and assign an [iAM policy](iAMPolicy.json) to the group, the linked policy will allow the useage of any models you have approve in the first point
@@ -20,6 +21,7 @@ docker build . -f  Dockerfile_ecs -t bedrock-gateway
 
 ## Docker Start
 
+*Note the default API key to access the container below is "bedrock"*
 ```
 docker run -e AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXXXXX \
 -e AWS_SECRET_ACCESS_KEY="XXXXXXXXXXXXXXXXXXXXXXXXXX" \
@@ -29,12 +31,12 @@ docker run -e AWS_ACCESS_KEY_ID=XXXXXXXXXXXXXXXXXXXXX \
 -p 127.0.0.1:3002:80 \
 bedrock-gateway
 ```
-*Note the default API key to access the container is "bedrock"*
 
 To test the container is running you can use curl to connect and list all models (note I have piped into jq for readability, ensure you have that installed):
 
+
 ```
-curl http://IPADDRESS:PORT/api/v1/models   -H "Content-Type: application/json"   -H "Authorization: Bearer bedrock" | jq 
+curl http://IPADDRESS:PORT/api/v1/models -H "Content-Type: application/json" -H "Authorization: Bearer bedrock" | jq 
 ```
 
 ## Configure OpenWeb UI
