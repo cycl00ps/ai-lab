@@ -24,12 +24,15 @@ flowchart TD
         H["search.domain"]
         J["llama-swap.domain"]
   end
+ subgraph subGraph3["Docker - localhost:3003"]
+        K["vllm - IPEX"]
+  end
     A --> B & F["llama.swap"] & H & J
     C --> D
     E --> A
     H --> C
     F --> G["llama.cpp"]
-    F --> K["vllm Docker"]
+    F --> K
     I["User"] --> E
     I["User"] --> H
     I --> J
