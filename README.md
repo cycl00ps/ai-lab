@@ -27,7 +27,7 @@ flowchart TD
  subgraph subGraph3["Docker - localhost:3003"]
         K["vllm - IPEX"]
   end
-    A --> B & F["llama.swap"] & H & J
+    A --> B & H & J
     C --> D
     E --> A
     H --> C
