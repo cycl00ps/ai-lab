@@ -27,7 +27,11 @@ flowchart TD
  subgraph subGraph3["Docker - localhost:3003"]
         K["vllm - IPEX"]
   end
-    A --> B & H & J
+ subgraph subGraph4["Docker - localhost:3004"]
+        L["AWS bedrock-access-gateway"]
+  end
+
+    A --> B & H & J & L
     C --> D
     E --> A
     H --> C
@@ -37,7 +41,7 @@ flowchart TD
     I["User"] --> H
     I --> J
     J --> F
-
+OpenwebUI
      I:::Aqua
     classDef Aqua stroke-width:1px, stroke-dasharray:none, stroke:#46EDC8, fill:#DEFFF8, color:#378E7A
     style F stroke:#FFE0B2
