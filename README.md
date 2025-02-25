@@ -1,10 +1,11 @@
-# Text Model Lab
+# AI Model Lab
 
 High level diagram and descriptions below. Config files for ewach component in their respective folders.
 
 ## Purpose
 * Demonstrate quick deployment of AI/LLM frontends and supporting components, allowing you to concentrate on actually using models.
 * Ensure everything can run on-prem with NO external dependancies when using models.
+* Allow for "boost" capacity in the cloud allowing interaction with larger models.
 * Reproducable structure for larger scale deployments.
 
 ## High Level Component Diagram
@@ -53,6 +54,7 @@ OpenwebUI
 
 * https://github.com/ggerganov/llama.cpp/
 * https://github.com/mostlygeek/llama-swap
+* https://github.com/aws-samples/bedrock-access-gateway
 
 
 ## Hardware
