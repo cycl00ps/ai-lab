@@ -65,4 +65,4 @@ Note the GPU is adding a difficultly level if I did it again I'd use something b
 * Intel(R) Xeon(R) W-1290 CPU @ 3.20GHz
 * 128GB RAM
 * ~~Intel A770 16GB GPU~~
-* Nvidia 3090 GPU
+* Nvidia 3090 24GB GPU
