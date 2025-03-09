@@ -47,7 +47,7 @@ I:::Aqua
     classDef Aqua stroke-width:1px, stroke-dasharray:none, stroke:#46EDC8, fill:#DEFFF8, color:#378E7A
     style F stroke:#FFE0B2
     style G stroke:#FFE0B2
-    style subGraph2 stroke:#FFE0B2```
+    style subGraph2 stroke:#FFE0B2
 ```
 
 ## External Projects and Components
