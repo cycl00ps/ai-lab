@@ -6,7 +6,7 @@ After=network.target
 User=lab01
 
 # set this to match your environment
-ExecStart=/opt/llama-swap/start-llamaswap.sh
+ExecStart=/YOUR/PATH/HERE/llama-swap --config /YOUR/PATH/HERE/llama-swap.config.yml --listen 127.0.0.1:8080
 ExecStop=/bin/kill -SIGINT $MAINPID
 
 Restart=on-failure
