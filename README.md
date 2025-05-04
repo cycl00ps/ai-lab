@@ -26,7 +26,7 @@ flowchart TD
         J["llama-swap.domain"]
   end
  subgraph subGraph3["Docker - localhost:3003"]
-        K["vllm - IPEX"]
+        K["vllm"]
   end
  subgraph subGraph4["Docker - localhost:3002"]
         L["AWS bedrock-access-gateway"]
