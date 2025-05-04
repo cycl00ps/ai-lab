@@ -60,7 +60,7 @@ I:::Aqua
 
 ## Hardware
 Current lab hardware. 
-Note the GPU is adding a difficultly level if I did it again I'd use something better supported (NVIDIA or Apple M-Series), however the cost/RAM/tokens/sec ratio is pretty good.
+The original lab ujsed a Intel A770 16GB GPU,  this added a difficultly level that was not wroth the time invested in getting thing working (thought it did work for basic tasts). Hence the move to Nvidia 3090s.
 
 * Intel(R) Xeon(R) W-1290 CPU @ 3.20GHz
 * 128GB RAM
