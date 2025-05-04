@@ -1,0 +1,33 @@
+services:
+  n8n:
+    image: n8nio/n8n
+    container_name: n8n
+    restart: unless-stopped
+    networks:
+      - n8n-network
+    ports:
+      - "127.0.0.1:5678:5678"
+    environment:
+      - DB_TYPE=sqlite
+      - DB_SQLITE_VACUUM_ON_STARTUP=true
+      - WEBHOOK_URL=https://n8n.thethinkingman.info
+      - GENERIC_TIMEZONE=UTC
+      - N8N_BASIC_AUTH_ACTIVE=true
+      - N8N_BASIC_AUTH_USER=n8nuser
+      - N8N_BASIC_AUTH_PASSWORD=n8npassword
+      - N8N_METRICS_ENABLED=true
+      - N8N_TEMPLATES_ENABLED=true  # Disable templates
+    volumes:
+      - /mnt/data/docker-apps/n8n/n8n:/home/node/.n8n
+
+  redis:
+    image: docker.io/valkey/valkey:latest
+    container_name: n8n-redis
+    restart: unless-stopped
+    networks:
+      - n8n-network
+    volumes:
+      - /mnt/data/docker-apps/n8n/redis:/data
+
+networks:
+  n8n-network:
