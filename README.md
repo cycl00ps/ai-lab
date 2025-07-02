@@ -53,6 +53,8 @@ flowchart TD
     J --> F
     Y --> L
     n8nweb --> n8n
+    n8n --> n8n-redis
+    n8n --> n8n-qdrant
 
 I:::Aqua
     classDef Aqua stroke-width:1px, stroke-dasharray:none, stroke:#46EDC8, fill:#DEFFF8, color:#378E7A
