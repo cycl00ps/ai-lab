@@ -14,7 +14,7 @@
 
   redis:
     image: docker.io/valkey/valkey:latest
-    container_name: redis-valkey
+    container_name: redis
     volumes:
       - redis-data:/data
     command: "valkey-server --save 30 1"
