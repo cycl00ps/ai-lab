@@ -33,7 +33,7 @@ flowchart TD
         L["AWS bedrock-access-gateway"]
   end
 
-    A --> B & H & J & L
+    A --> B & H & J & Y
     C --> D
     E --> A
     H --> C
