@@ -25,7 +25,7 @@ flowchart TD
         H["search.domain"]
         J["llama-swap.domain"]
         Y["bedrock.domain"]
-        n8n["n8n.domain"]
+        n8nweb["n8n.domain"]
   end
  subgraph subGraph3["Docker - localhost:3003"]
         K["vllm"]
@@ -33,8 +33,13 @@ flowchart TD
  subgraph subGraph4["Docker - localhost:3002"]
         L["AWS bedrock-access-gateway"]
   end
+ subgraph subGraph5["Docker - n8n:3005"]
+        n8n["n8n"]
+        n8n-redis["redis"]
+        n8n-qdrant["qdrant"]
+  end
 
-    A --> B & H & J & Y
+    A --> B & H & J & Y & n8nweb
     C --> D
     E --> A
     H --> C
@@ -46,6 +51,7 @@ flowchart TD
     I --> J
     J --> F
     Y --> L
+    n8nweb --> n8n
 
 I:::Aqua
     classDef Aqua stroke-width:1px, stroke-dasharray:none, stroke:#46EDC8, fill:#DEFFF8, color:#378E7A
