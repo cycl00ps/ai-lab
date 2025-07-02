@@ -25,6 +25,7 @@ flowchart TD
         H["search.domain"]
         J["llama-swap.domain"]
         Y["bedrock.domain"]
+        n8n["n8n.domain"]
   end
  subgraph subGraph3["Docker - localhost:3003"]
         K["vllm"]
