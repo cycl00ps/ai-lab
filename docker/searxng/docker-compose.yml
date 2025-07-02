@@ -31,7 +31,7 @@ services:
     volumes:
       - /YOUR/LOCAL/FOLDER/HERE:/etc/searxng:rw  # Custom volume path for searxng configuration
     environment:
-      - SEARXNG_BASE_URL=https://search.thethinkingman.info/ #Change "your.docker.server.ip" to your Docker server's IP
+      - SEARXNG_BASE_URL=https://search.YOURDOMAINHERE/ #Change "your.docker.server.ip" to your Docker server's IP
       - UWSGI_WORKERS=4 #You can change this
       - UWSGI_THREADS=4 #You can change this
 #    cap_drop:
