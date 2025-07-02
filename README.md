@@ -48,6 +48,7 @@ flowchart TD
     J --> K
     I["User"] --> E
     I["User"] --> H
+    I["User"] --> n8nweb
     I --> J
     J --> F
     Y --> L
