@@ -37,6 +37,7 @@ flowchart TD
     E --> A
     H --> C
     F["llama-swap"] --> G["llama.cpp"]
+    F["llama-swap"] --> Z["whisper.cpp"]
     F --> K
     I["User"] --> E
     I["User"] --> H
