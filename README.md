@@ -24,6 +24,7 @@ flowchart TD
         E["ai.domain"]
         H["search.domain"]
         J["llama-swap.domain"]
+        Y["bedrock.domain"]
   end
  subgraph subGraph3["Docker - localhost:3003"]
         K["vllm"]
@@ -38,7 +39,7 @@ flowchart TD
     H --> C
     F["llama-swap"] --> G["llama.cpp"]
     F["llama-swap"] --> Z["whisper.cpp"]
-    F --> K
+    Y --> K
     I["User"] --> E
     I["User"] --> H
     I --> J
