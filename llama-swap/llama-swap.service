@@ -4,15 +4,20 @@ After=network.target
 
 [Service]
 User=lab01
+Group=lab01
 
 # set this to match your environment
-ExecStart=/YOUR/PATH/HERE/llama-swap --config /YOUR/PATH/HERE/llama-swap.config.yml --listen 127.0.0.1:8080
+ExecStart=/mnt/data/ai-software/llama-swap/llama-swap --config /mnt/data/ai-software/llama-swap/llama-swap.config.yml
 ExecStop=/bin/kill -SIGINT $MAINPID
+
+# Needed to add this so  whisper.cpp would work
+WorkingDirectory=/mnt/data/ai-software/llama-swap/
 
 Restart=on-failure
 RestartSec=3
 StartLimitBurst=3
 StartLimitInterval=30
+
 
 [Install]
 WantedBy=multi-user.target
