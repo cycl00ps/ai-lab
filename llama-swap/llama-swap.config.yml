@@ -1,33 +1,194 @@
 # Seconds to wait for llama.cpp to load and be ready to serve requests
 # If your models take longer to load make this longer
 # Default (and minimum) is 15 seconds
-healthCheckTimeout: 30
+healthCheckTimeout: 500
 
 # Write HTTP logs (useful for troubleshooting), defaults to false
-logRequests: true
+# Valid log levels: debug, info (default), warn, error
+logLevel: info
 
-# define valid model values and the upstream server start
+# startPort: sets the starting port number for the automatic ${PORT} macro.
+# - optional, default: 5800
+# - the ${PORT} macro can be used in model.cmd and model.proxy settings
+# - it is automatically incremented for every model that uses it
+startPort: 10001
+
+# macros: sets a dictionary of string:string pairs
+# - optional, default: empty dictionary
+# - these are reusable snippets
+# - used in a model's cmd, cmdStop, proxy and checkEndpoint
+# - useful for reducing common configuration settings
+
+macros:
+  "llama-server": >
+    /mnt/data/ai-software/llama.cpp/build/bin/llama-server
+    --port ${PORT}
+    --flash-attn
+    --slots
+    --n-predict -1
+    --threads 4
+    --ignore-eos
+    --escape
+    --split-mode layer
+    --n-gpu-layers 999
+    --no-webui
+    --cache-type-k-draft q8_0
+    --cache-type-v-draft q8_0
+
+  "whisper-server": >
+    /mnt/data/ai-software/whisper.cpp/build/bin/whisper-server
+    --port ${PORT}
+    --convert
+    -bs 5 -et 2.8 -mc 64
+    --request-path /v1/audio/transcriptions
+    --inference-path ""
+
 models:
-  "DeepSeek-R1-Distill-Llama-8B-Q5_K":
-    # The command you want llama.cpp to run and how you want it to behave with this model
-	cmd: /YOUR/llamacpp/LOCATION/llama.cpp/build/bin/llama-server --host 127.0.0.1 --port 8999 -m /YOUR/SAVED/MODEL/LOCATIONS/DeepSeek-R1-Distill-Llama-8B-Q5_K.gguf -n -1 --ignore-eos -e -ngl 80 -sm none -mg 0 --n-gpu-layers 66
-
-    # where to reach the server started by cmd, make sure the ports match
-    proxy: http://127.0.0.1:8999
-
-    # aliases names to use this model for
+  "whisper":
+    checkEndpoint: /v1/audio/transcriptions/
+    cmd: |
+      ${whisper-server}
+      --model /mnt/data2/ggml-large-v3.bin
     aliases:
-    - "DeepSeek-R1-Distill-Llama-8B-Q5_K"
-
-    # check this path for an HTTP 200 OK before serving requests
-    # default: /health to match llama.cpp
-    # use "none" to skip endpoint checking, but may cause HTTP errors
-    # until the model is ready
-    checkEndpoint: /health
-
-    # automatically unload the model after this many seconds
-    # ttl values must be a value greater than 0
-    # default: 0 = never unload model
+      - "whisper-1"
     ttl: 120
 
-#Add as many models as you want openwebui to be able to load.
+  "Qwen3-30B-A3B-Q8_0":
+    cmd: |
+      ${llama-server}
+      --model /mnt/data/Qwen3-30B-A3B-Q8_0.gguf
+    aliases:
+      - "Qwen3-30B-A3B-Q8_0"
+    checkEndpoint: /health
+    ttl: 120
+
+  "Qwen2.5-VL-32B":
+    cmd: |
+      ${llama-server}
+      --model /mnt/data/Qwen_Qwen2.5-VL-32B-Instruct-Q4_K_M.gguf
+      --mmproj /mnt/data/mmproj-Qwen_Qwen2.5-VL-32B-Instruct-bf16.gguf
+      --ctx-size 32768
+      --temp 0.6 --min-p 0
+      --top-k 20 --top-p 0.95
+      --no-mmap
+    aliases:
+      - "Qwen2.5-VL-32B"
+    checkEndpoint: /health
+    ttl: 120
+
+  "Qwen2.5-VL-7B-Instruct-Q8_0":
+    cmd: |
+      ${llama-server}
+      -m /mnt/data/Qwen2.5-VL-7B-Instruct-Q8_0.gguf
+      --mmproj /mnt/data/qwen2.5-vl-7b-vision-mmproj-f16.gguf
+    aliases:
+      - "Qwen2.5-VL-7B-Instruct-Q8_0"
+    checkEndpoint: /health
+    ttl: 120
+
+  "Phi-4-mini-reasoning-F16":
+    cmd: |
+      ${llama-server}
+      -m /mnt/data2/Phi-4-mini-reasoning-F16.gguf
+    aliases:
+      - "Phi-4-mini-reasoning-F16"
+    checkEndpoint: /health
+    ttl: 120
+
+  "Phi-4-reasoning-F16":
+    cmd: |
+      ${llama-server}
+      -m /mnt/data2/Phi-4-reasoning-F16.gguf
+    aliases:
+      - "Phi-4-reasoning-F16"
+    checkEndpoint: /health
+    ttl: 120
+
+  "Phi-4-reasoning-plus-F16":
+    cmd: |
+      ${llama-server}
+      -m /mnt/data2/Phi-4-reasoning-plus-F16.gguf
+    aliases:
+      - "Phi-4-reasoning-plus-F16"
+    checkEndpoint: /health
+    ttl: 120
+
+  "Microsoft-Phi4-Q8":
+    cmd: |
+      ${llama-server}
+      -m /mnt/data/phi4-Q8_0.gguf
+    aliases:
+    - "Microsoft-Phi4-Q8"
+    checkEndpoint: /health
+    ttl: 120
+
+  "Qwen3-14B-F16":
+    cmd: |
+      ${llama-server}
+      -m /mnt/data/Qwen3-14B-F16.gguf
+    aliases:
+    - "Qwen3-14B-F16"
+    checkEndpoint: /health
+    ttl: 120
+
+  "QwQ-32B-Q8_0":
+    cmd: |
+      ${llama-server}
+      -m /mnt/data/QwQ-32B-Q8_0.gguf
+    aliases:
+    - "QwQ-32B-Q8_0"
+    checkEndpoint: /health
+    ttl: 120
+
+  "Qwen2.5-Coder-32B-Instruct-Q4_K_L":
+    cmd: |
+      ${llama-server}
+      -m /mnt/data/Qwen2.5-Coder-32B-Instruct-Q4_K_L.gguf
+    aliases:
+    - "Qwen2.5-Coder-32B-Instruct-Q4_K_L"
+    checkEndpoint: /health
+    ttl: 120
+
+  "Qwen2.5-Coder-14B-Instruct":
+    proxy: "http://127.0.0.1:8081"
+    cmd: >
+      docker run --init --rm
+      --runtime nvidia --gpus=all
+      -v '/mnt/data/:/models'
+      -p 8081:8000
+      --ipc=host
+      vllm/vllm-openai:latest
+      --served-model-name Qwen2.5-Coder-14B-Instruct
+      --enable-auto-tool-choice
+      --tool-call-parser hermes
+      --gpu-memory-utilization 0.8
+      --tensor-parallel-size 2
+      --max_num_seqs 1
+      --model '/models/Qwen2.5-Coder-14B-Instruct'
+      --tokenizer '/models/Qwen2.5-Coder-14B-Instruct'
+    aliases:
+    - "Qwen2.5-Coder-14B-Instruct"
+    checkEndpoint: /health
+    ttl: 480
+
+  "Microsoft-Phi4":
+    proxy: "http://127.0.0.1:8081"
+    cmd: |
+      docker run --init --rm --runtime nvidia --gpus=all
+      -v '/mnt/data/:/models'
+      -p 8081:8000
+      --ipc=host
+      'docker.io/vllm/vllm-openai:latest'
+      --served-model-name Microsoft-Phi4
+      --enable-auto-tool-choice
+      --tool-call-parser llama3_json
+      --dtype half
+      --gpu-memory-utilization 0.8
+      --tensor-parallel-size 2
+      --max_num_seqs 1
+      --model '/models/phi-4'
+      --tokenizer '/models/phi-4'
+    aliases:
+    - "Microsoft-Phi4"
+    checkEndpoint: /health
+    ttl: 120
